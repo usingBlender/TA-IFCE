@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="715"
+   height="165"
+   viewBox="0 0 189.17708 43.656249"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.1 (93de688d07, 2025-03-30)"
+   sodipodi:docname="bannerzin2.svg"
+   inkscape:export-filename="BG.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showguides="true"
+     inkscape:zoom="1.0104048"
+     inkscape:cx="376.08689"
+     inkscape:cy="71.258569"
+     inkscape:window-width="1920"
+     inkscape:window-height="1004"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1">
+    <sodipodi:guide
+       position="0,21.828124"
+       orientation="0,-1"
+       id="guide12"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="94.588537,43.656249"
+       orientation="1,0"
+       id="guide13"
+       inkscape:locked="false" />
+  </sodipodi:namedview>
+  <defs
+     id="defs1">
+    <linearGradient
+       id="linearGradient11"
+       inkscape:collect="always">
+      <stop
+         style="stop-color:#3a81a9;stop-opacity:1;"
+         offset="0"
+         id="stop11" />
+      <stop
+         style="stop-color:#092d43;stop-opacity:0;"
+         offset="1"
+         id="stop12" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient8"
+       inkscape:collect="always">
+      <stop
+         style="stop-color:#4fa6d5;stop-opacity:1;"
+         offset="0"
+         id="stop9" />
+      <stop
+         style="stop-color:#092d43;stop-opacity:1;"
+         offset="0.56920737"
+         id="stop10" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient5"
+       inkscape:collect="always">
+      <stop
+         style="stop-color:#f7cacd;stop-opacity:1;"
+         offset="0.12461816"
+         id="stop8" />
+      <stop
+         style="stop-color:#f29ca3;stop-opacity:1;"
+         offset="0.43761832"
+         id="stop6" />
+      <stop
+         style="stop-color:#de4d86;stop-opacity:1;"
+         offset="0.90292019"
+         id="stop7" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3"
+       inkscape:collect="always">
+      <stop
+         style="stop-color:#64113f;stop-opacity:1;"
+         offset="0"
+         id="stop3" />
+      <stop
+         style="stop-color:#a12f63;stop-opacity:1;"
+         offset="0.49151069"
+         id="stop5" />
+      <stop
+         style="stop-color:#de4d86;stop-opacity:0;"
+         offset="0.90595359"
+         id="stop4" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3"
+       id="linearGradient4"
+       x1="0"
+       y1="27.288237"
+       x2="189.17708"
+       y2="27.288237"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient5"
+       id="linearGradient7"
+       x1="109.34401"
+       y1="-24.263523"
+       x2="162.56607"
+       y2="67.919777"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient8"
+       id="linearGradient10"
+       x1="16.171082"
+       y1="74.721359"
+       x2="173.006"
+       y2="-31.065123"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient11"
+       id="linearGradient12"
+       x1="2.7162333"
+       y1="11.325224"
+       x2="40.611706"
+       y2="32.331028"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     inkscape:export-filename="Challenges.png"
+     inkscape:export-xdpi="96"
+     inkscape:export-ydpi="96">
+    <rect
+       style="fill:url(#linearGradient10);stroke-width:0.264583;fill-rule:nonzero"
+       id="rect3"
+       width="189.17708"
+       height="43.65625"
+       x="0"
+       y="0" />
+    <path
+       style="fill:url(#linearGradient7);stroke-width:0.264583"
+       d="M 189.17708,43.656249 V 0 H 170.34912 152.01808 C 137.57543,0 149.81804,16.951792 136.2793,19.256858 122.74056,21.561924 109.61595,2.4071072 96.099123,2.4996878 84.67773,2.5779162 82.832454,12.411951 82.832454,12.411951 l -0.0995,31.244298 z"
+       id="path2"
+       sodipodi:nodetypes="cccszsccc" />
+    <path
+       style="fill:url(#linearGradient4);stroke-width:0.264583"
+       d="m 189.17708,43.656249 c 0,-9.584881 0,-26.364595 0,-26.364595 0,0 0,14.305983 -29.8451,15.75978 -6.02413,0.293444 -34.57819,1.162781 -56.98524,-12.334281 C 87.612566,11.84191 77.029885,11.000052 69.972661,10.924564 62.820392,10.84806 36.977438,11.642519 18.127275,24.811721 0,37.475895 0,43.65625 0,43.65625 Z"
+       id="path1"
+       sodipodi:nodetypes="ccsssscc" />
+    <path
+       style="display:inline;fill:url(#linearGradient12);stroke-width:0.264583"
+       d="M 0,43.656249 V 0 c 0,0 15.34774,5.4148456 27.063838,16.34145 12.768197,11.907807 16.264093,27.314799 16.264093,27.314799 z"
+       id="path3"
+       sodipodi:nodetypes="ccscc" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:16.9333px;line-height:0.9;font-family:'CaskaydiaMono Nerd Font';-inkscape-font-specification:'CaskaydiaMono Nerd Font Semi-Bold';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;display:none;fill:#ffffff;fill-rule:nonzero;stroke-width:0.264583"
+       x="94.588539"
+       y="27.942881"
+       id="text12"><tspan
+         sodipodi:role="line"
+         id="tspan12"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16.9333px;font-family:'UbuntuSans Nerd Font';-inkscape-font-specification:'UbuntuSans Nerd Font Bold';fill:#ffffff;stroke-width:0.264583"
+         x="0"
+         y="0">Challenges</tspan></text>
+  </g>
+</svg>
