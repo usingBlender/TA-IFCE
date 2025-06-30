@@ -68,7 +68,7 @@ let costList:[robuxCost] = [
 /// - Parameter hideDescription: Set to if the function returns the description breakdown of the costs
 ///
 /// - Returns: A tuple of (remainder, mixedTotal, desktopTotal, costBreakdown, costTransactions)
-func moneyToRobux(money: Double, hideDescription: Bool) -> (Double, Int, Int, String?, Int) {
+func MoneyToRobux(money: Double, hideDescription: Bool) -> (Double, Int, Int, String?, Int) {
     var mixedTotal:Int = 0
     var desktopTotal:Int = 0
     
@@ -114,7 +114,7 @@ func moneyToRobux(money: Double, hideDescription: Bool) -> (Double, Int, Int, St
 /// - Parameter hideDescription: Set to if the function returns the description breakdown of the costs
 ///
 /// - Returns: A tuple of (remainder, mixedTotal, desktopTotal, costBreakdown, costTransactions)
-func robuxToMoney(robux: Int, hideDescription: Bool) -> (Int, Double, Double, String?, Int) {
+func RobuxToMoney(robux: Int, hideDescription: Bool) -> (Int, Double, Double, String?, Int) {
     var mixedTotal:Double = 0
     var desktopTotal:Double = 0
 

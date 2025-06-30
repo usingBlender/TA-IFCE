@@ -2,7 +2,7 @@
 ///
 /// - Parameter gamepassPrice: The price of the gamepass
 /// - Returns: The reward given to the seller accounted for the 30% tax
-func calculateGamepassReward(gamepassPrice: Int) -> Int {
+func CalculateGamepassReward(gamepassPrice: Int) -> Int {
     let gamepass:Double = Double(gamepassPrice)
     let reward:Double = (gamepass*0.7).rounded(.down) // o bixin tá feio mas tá servindo
 
@@ -13,7 +13,7 @@ func calculateGamepassReward(gamepassPrice: Int) -> Int {
 ///
 /// - Parameter desiredReward: The input for the desired reward out of the gamepass
 /// - Returns: The price of the gamepass necessary for given reward
-func calculateGamepassCost(desiredReward: Int) -> Int {
+func CalculateGamepassCost(desiredReward: Int) -> Int {
     let reward:Double = Double(desiredReward)
     let cost:Double = (reward/0.7).rounded(.up)
 
