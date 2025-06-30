@@ -16,13 +16,13 @@ struct Calculadora:ParsableCommand {
     var devex:Int? = nil // func done
 
     @Flag(help: "Enable or disable the purchase guides on the RBX-Money or Money-RBX options")
-    var hidePurchaseGuide:Bool = false
+    var hidePurchaseGuide:Bool = false // flag
 
     @Option(help: "Input an amount of robux, get how much it'll cost and what to purchase")
-    var robux:Int? = nil
+    var robux:Int? = nil // func done
 
     @Option(help: "Input an amount of money, get how much roblox it'll total to and what to purchase")
-    var money:Int? = nil
+    var money:Int? = nil // func done
 
     mutating func run() throws {
     }

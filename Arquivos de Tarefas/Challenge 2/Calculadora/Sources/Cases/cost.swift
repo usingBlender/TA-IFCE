@@ -108,6 +108,12 @@ func moneyToRobux(money: Double, hideDescription: Bool) -> (Double, Int, Int, St
     return (moneyBalance, mixedTotal, desktopTotal, description, localCostList.count)
 }
 
+/// Calculates how much money (USD) is necessary to buy a certain amount of robux
+///
+/// - Parameter robux: The input amount of robux
+/// - Parameter hideDescription: Set to if the function returns the description breakdown of the costs
+///
+/// - Returns: A tuple of (remainder, mixedTotal, desktopTotal, costBreakdown, costTransactions)
 func robuxToMoney(robux: Int, hideDescription: Bool) -> (Int, Double, Double, String?, Int) {
     var mixedTotal:Double = 0
     var desktopTotal:Double = 0
@@ -121,12 +127,29 @@ func robuxToMoney(robux: Int, hideDescription: Bool) -> (Int, Double, Double, St
                 mixedTotal += cost.cost
                 desktopTotal += cost.cost
 
-
+                robuxBalance -= cost.desktopAmount!
             }
+            else if cost.mobileAmount <= robuxBalance {
+                mixedTotal += cost.cost
+
+                robuxBalance -= cost.mobileAmount
+            }
+
+            localCostList.append(cost)
+
+            break // mesma coisa dalí de cima, tudo no funcione-por-favorometro e vamo ver nos teste
         }
     }
 
+    // detalhamento dos custos
+    var description:String? = nil
+    if !hideDescription {
+        description = "Breakdown:\n"
+        for cost in localCostList {
+            description! += "\(cost.description)\n"
+        }
 
+    }
 
-    return (0, 2.0, 2.0, "temp")
+    return (robuxBalance, mixedTotal, desktopTotal, description, localCostList.count)
 }
