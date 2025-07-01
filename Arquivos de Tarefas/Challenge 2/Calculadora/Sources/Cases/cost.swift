@@ -3,12 +3,16 @@ struct robuxCost {
     let mobileAmount:Int
     let cost:Double
 
+    // Negócio de dinheiro
+    var multiplier:Double = 1
+    var currency:String = "usd"
+
     var description:String {
         if desktopAmount == nil {
-            return "\(mobileAmount) Robux (mobile only) || \(cost) ";
+            return "\(mobileAmount) Robux (mobile only) || $\(cost*multiplier) \(currency.uppercased())";
         }
         else {
-            return "\(mobileAmount) Robux (mobile) / \(desktopAmount!) Robux (desktop) || \(cost)";
+            return "\(mobileAmount) Robux (mobile) / \(desktopAmount!) Robux (desktop) || $\(cost*multiplier) \(currency.uppercased())";
         }
     }
 }
@@ -68,7 +72,7 @@ let costList:[robuxCost] = [
 /// - Parameter hideDescription: Set to if the function returns the description breakdown of the costs
 ///
 /// - Returns: A tuple of (remainder, mixedTotal, desktopTotal, costBreakdown, costTransactions)
-func MoneyToRobux(money: Double, hideDescription: Bool) -> (Double, Int, Int, String?, Int) {
+func MoneyToRobux(money: Double, hideDescription: Bool, multiplier: Double, currency: String) -> (Double, Int, Int, String?, Int) {
     var mixedTotal:Int = 0
     var desktopTotal:Int = 0
     
@@ -88,7 +92,11 @@ func MoneyToRobux(money: Double, hideDescription: Bool) -> (Double, Int, Int, St
                     mixedTotal += cost.mobileAmount // se não tem, não usa
                 }
 
-                localCostList.append(cost)
+                var modifiedCost = cost
+                modifiedCost.multiplier = multiplier
+                modifiedCost.currency = currency
+
+                localCostList.append(modifiedCost)
 
                 break // por favor que este break só quebre o loop for e não while
             }
@@ -98,7 +106,7 @@ func MoneyToRobux(money: Double, hideDescription: Bool) -> (Double, Int, Int, St
     // detalhamento dos custos
     var description:String? = nil
     if !hideDescription {
-        description = "Breakdown:\n"
+        description = "\nDetalhamento:\n"
         for cost in localCostList {
             description! += "\(cost.description)\n"
         }
@@ -114,7 +122,7 @@ func MoneyToRobux(money: Double, hideDescription: Bool) -> (Double, Int, Int, St
 /// - Parameter hideDescription: Set to if the function returns the description breakdown of the costs
 ///
 /// - Returns: A tuple of (remainder, mixedTotal, desktopTotal, costBreakdown, costTransactions)
-func RobuxToMoney(robux: Int, hideDescription: Bool) -> (Int, Double, Double, String?, Int) {
+func RobuxToMoney(robux: Int, hideDescription: Bool, multiplier: Double, currency: String) -> (Int, Double, Double, String?, Int) {
     var mixedTotal:Double = 0
     var desktopTotal:Double = 0
 
@@ -135,7 +143,11 @@ func RobuxToMoney(robux: Int, hideDescription: Bool) -> (Int, Double, Double, St
                 robuxBalance -= cost.mobileAmount
             }
 
-            localCostList.append(cost)
+                var modifiedCost = cost
+                modifiedCost.multiplier = multiplier
+                modifiedCost.currency = currency
+
+                localCostList.append(modifiedCost)
 
             break // mesma coisa dalí de cima, tudo no funcione-por-favorometro e vamo ver nos teste
         }
@@ -144,7 +156,7 @@ func RobuxToMoney(robux: Int, hideDescription: Bool) -> (Int, Double, Double, St
     // detalhamento dos custos
     var description:String? = nil
     if !hideDescription {
-        description = "Breakdown:\n"
+        description = "\nDetalhamento:\n"
         for cost in localCostList {
             description! += "\(cost.description)\n"
         }

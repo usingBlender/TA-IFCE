@@ -1,63 +1,82 @@
 import Foundation
 import FoundationNetworking // :3
 
-/// Verifies the validity of a currency code in accordance to the ISO 4217 standard
-/// - Parameter currencyCode: The currency code
-/// - Returns: true if valid, false if not
-func VerifyCodeValidity(currencyCode: String) -> Bool {
-    let alphabet = "ABCDEFGHIJKLMONPQRSTUVWXYZ"
-    let code = currencyCode.uppercased()
+class CurrencyExchangeManager {
+    // STRUCTS AQUI
 
-    if code.count > 3 || code.count < 3 {
-        return false
-    } // todo codigo tem 3 letras
+    /// Codable base for the exchange rate table
+    struct ExchangeRateTable: Codable {
+        var date:String
+        var usd:[String:Double]
+    }
 
-    for char in code {
-        if !alphabet.contains(char) {
+    // PROPRIEDADES AQUI
+
+    /// Holds the exchange rates
+    var exchangeRateTable:ExchangeRateTable? = nil
+
+    // INICIALIZADOR(ES)
+
+    init() {}
+
+    // METODOS AQUI
+
+    /// Verifies the validity of a currency code in accordance to the ISO 4217 standard
+    /// - Parameter currencyCode: The currency code
+    /// - Returns: true if valid, false if not
+    func VerifyCodeValidity(currencyCode: String) -> Bool {
+        let alphabet = "abcdefghijklmnopqrstuvwxyz"
+        let code = currencyCode.lowercased()
+    
+        if code.count > 3 || code.count < 3 {
             return false
-        }
-    } // verificar se tá tudo em letra comum maiuscula
-
-    return true // se nada deu problema então tá de boa
-}
-
-// negocios da troca lá
-struct ExchangeRateTable: Codable {
-    var date:String
-    var usd:[String:Double]
-}
-
-func GetExchangeRate(currencyCode: String) -> (Double, Bool) {
-    var teste:Data
-    GetJsonFromURL { result in
-        switch result {
-            case .success(let data):
-                print("aqui dá erro")
-                // teste = data // mutation of captured var 'teste' in concurrently-executing code
-            case .failure(let error):
-                print("teste erro")
-        }
-    }
-    return (0.0, true)
-}
-
-fileprivate func GetJsonFromURL(completion: @escaping @Sendable (Result<Data,Error>) -> Void) {
-    let url = URL(string: "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.json")
-
-    guard url != nil else {
-        // jogar um erro aqui, wip (URL)
-        return
+        } // todo codigo tem 3 letras
+    
+        for char in code {
+            if !alphabet.contains(char) {
+                return false
+            }
+        } // verificar se tá tudo em letra comum minuscula
+    
+        return true // se nada deu problema então tá de boa
     }
 
-    let unwrappedUrl = url!
+    /// Finds the exchange rate respective to the code
+    /// - Parameter currencyCode: The currency code
+    /// - Returns: A tuple of a double (the exchange rate) and a bool (if the query failed or not)
+    func FindRateByCode(currencyCode: String) -> (Double, Bool) {
+        guard let rateTable = exchangeRateTable else {
+            print("Tabela de taxas em FindRateByCode() por algum motivo nula")
+            return (0.0, false)
+        }
 
-    let task = URLSession(configuration: .default).dataTask(with: unwrappedUrl) { (data, response, error) in
-        if let error = error {
-            completion(.failure(error))
+        for rate in rateTable.usd {
+            if rate.key == currencyCode {
+                return (rate.value, true)
+            }
         }
-        if let data = data {
-            completion(.success(data))
-        }
+
+        // caso não encontre nenhuma lingua valida, retorne padrão
+        return (0.0, false)
     }
-    task.resume()
+    
+    /// Loads data, private function, doesn't matter what I write here, documentation is cool
+    func LoadData() async -> Result<Bool, Error> {
+        guard let url = URL(string: "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.json") else {
+            return Result.failure(CustomErrors.error("URL em LoadData() por algum motivo nula")) // retornar falha
+        }
+
+        do {
+            let (data, _) = try await URLSession.shared.data(from: url)
+
+            if let decodedResponse = try? JSONDecoder().decode(ExchangeRateTable.self, from: data) {
+                exchangeRateTable = decodedResponse
+                return Result.success(true)
+            }
+        } catch {
+            return Result.failure(CustomErrors.error("Erro pegue ao puxar data no bloco try-catch com URLSession em LoadData()"))
+        }
+
+        return Result.failure(CustomErrors.error("Função LoadData() por algum motivo não supriu nenhuma condição antes imposta, verificar isso aí"))
+    }
 }
