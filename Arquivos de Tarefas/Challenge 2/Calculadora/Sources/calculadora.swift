@@ -120,7 +120,7 @@ struct Calculadora:AsyncParsableCommand {
             CALCULO DE DEVEX:
 
             ROBUX: \(devex!) RBX
-            RECOMPENSA: $\(payout) \(currency.uppercased())
+            RECOMPENSA: \(payout) \(currency.uppercased())
 
             """
 
@@ -156,8 +156,8 @@ struct Calculadora:AsyncParsableCommand {
                 output += """
                 \n--------------------
 
-                TOTAL (COMPRAS PC + MOBILE): $\(mixedTotal) \(currency.uppercased())
-                TOTAL (COMPRAS SOMENTE PC): $\(desktopTotal) \(currency.uppercased())
+                TOTAL (COMPRAS PC + MOBILE): \(mixedTotal) \(currency.uppercased())
+                TOTAL (COMPRAS SOMENTE PC): \(desktopTotal) \(currency.uppercased())
 
                 \n--------------------
                 """
@@ -176,8 +176,8 @@ struct Calculadora:AsyncParsableCommand {
             \n=========================================
             GUIA DINHEIRO -> ROBUX:
 
-            DINHEIRO (PARA GASTAR): $\(money!) \(currency.uppercased())
-            RESTO (NÃO GASTÁVEL): $\(remainder) \(currency.uppercased())
+            DINHEIRO (PARA GASTAR): \(money!) \(currency.uppercased())
+            RESTO (NÃO GASTÁVEL): \(remainder) \(currency.uppercased())
 
             """
 

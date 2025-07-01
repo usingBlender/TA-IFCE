@@ -9,10 +9,10 @@ struct robuxCost {
 
     var description:String {
         if desktopAmount == nil {
-            return "\(mobileAmount) Robux (mobile only) || $\(cost*multiplier) \(currency.uppercased())";
+            return "\(mobileAmount) Robux (mobile only) || \(cost*multiplier) \(currency.uppercased())";
         }
         else {
-            return "\(mobileAmount) Robux (mobile) / \(desktopAmount!) Robux (desktop) || $\(cost*multiplier) \(currency.uppercased())";
+            return "\(mobileAmount) Robux (mobile) / \(desktopAmount!) Robux (desktop) || \(cost*multiplier) \(currency.uppercased())";
         }
     }
 }
@@ -81,6 +81,10 @@ func MoneyToRobux(money: Double, hideDescription: Bool, multiplier: Double, curr
 
     while moneyBalance >= 0.49 {
         for cost in costList {
+            var found:Bool = false
+
+            print("teste1")
+
             if cost.cost <= moneyBalance {
                 moneyBalance -= cost.cost
 
@@ -98,9 +102,15 @@ func MoneyToRobux(money: Double, hideDescription: Bool, multiplier: Double, curr
 
                 localCostList.append(modifiedCost)
 
-                break // por favor que este break só quebre o loop for e não while
+                found = true
+            }
+
+            if found {
+                break
             }
         }
+
+        print("teste 2")
     }
     
     // detalhamento dos custos
@@ -130,6 +140,10 @@ func RobuxToMoney(robux: Int, hideDescription: Bool, multiplier: Double, currenc
     var localCostList:[robuxCost] = []
 
     while robuxBalance >= 40 {
+        var found:Bool = false
+
+        print("teste1")
+
         for cost in costList {
             if cost.desktopAmount != nil && cost.desktopAmount! <= robuxBalance {
                 mixedTotal += cost.cost
@@ -149,8 +163,14 @@ func RobuxToMoney(robux: Int, hideDescription: Bool, multiplier: Double, currenc
 
                 localCostList.append(modifiedCost)
 
-            break // mesma coisa dalí de cima, tudo no funcione-por-favorometro e vamo ver nos teste
+            found = true
         }
+
+        if found {
+            break
+        }
+
+        print("teste2")
     }
 
     // detalhamento dos custos

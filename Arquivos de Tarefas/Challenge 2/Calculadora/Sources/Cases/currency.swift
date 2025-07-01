@@ -1,5 +1,5 @@
 import Foundation
-import FoundationNetworking // :3
+// import FoundationNetworking // :3
 
 class CurrencyExchangeManager {
     // STRUCTS AQUI
@@ -51,7 +51,7 @@ class CurrencyExchangeManager {
         }
 
         for rate in rateTable.usd {
-            if rate.key == currencyCode {
+            if rate.key == currencyCode.lowercased() {
                 return (rate.value, true)
             }
         }
@@ -71,6 +71,8 @@ class CurrencyExchangeManager {
 
             if let decodedResponse = try? JSONDecoder().decode(ExchangeRateTable.self, from: data) {
                 exchangeRateTable = decodedResponse
+
+                var teste = JSONSerialization.jsonObject(with: data, options: [])
                 return Result.success(true)
             }
         } catch {
