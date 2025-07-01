@@ -9,7 +9,7 @@ struct robuxCost {
 
     var description:String {
         if desktopAmount == nil {
-            return "\(mobileAmount) Robux (mobile only) || \(cost*multiplier) \(currency.uppercased())";
+            return "\(mobileAmount) Robux (mobile somente) || \(cost*multiplier) \(currency.uppercased())";
         }
         else {
             return "\(mobileAmount) Robux (mobile) / \(desktopAmount!) Robux (desktop) || \(cost*multiplier) \(currency.uppercased())";
@@ -143,7 +143,6 @@ func RobuxToMoney(robux: Int, hideDescription: Bool, multiplier: Double, currenc
                 mixedTotal += cost.cost
                 desktopTotal += cost.cost
 
-                print("amount: \(cost.desktopAmount!)")
                 robuxBalance -= cost.desktopAmount!
 
                 found = true
