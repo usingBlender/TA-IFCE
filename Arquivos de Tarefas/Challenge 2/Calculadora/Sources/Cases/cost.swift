@@ -134,13 +134,12 @@ func RobuxToMoney(robux: Int, hideDescription: Bool, multiplier: Double, currenc
     var localCostList:[robuxCost] = []
 
     while robuxBalance >= 40 {
-        print("teste1")
-
-        innerLoop: for cost in costList {
+        for cost in costList {
             if cost.desktopAmount != nil && cost.desktopAmount! <= robuxBalance {
                 mixedTotal += cost.cost
                 desktopTotal += cost.cost
 
+                print("amount: \(cost.desktopAmount!)")
                 robuxBalance -= cost.desktopAmount!
             }
             else if cost.mobileAmount <= robuxBalance {
@@ -149,16 +148,12 @@ func RobuxToMoney(robux: Int, hideDescription: Bool, multiplier: Double, currenc
                 robuxBalance -= cost.mobileAmount
             }
 
-                var modifiedCost = cost
-                modifiedCost.multiplier = multiplier
-                modifiedCost.currency = currency
+            var modifiedCost = cost
+            modifiedCost.multiplier = multiplier
+            modifiedCost.currency = currency
 
-                localCostList.append(modifiedCost)
-
-            break innerLoop
+            localCostList.append(modifiedCost)
         }
-
-        print("teste2")
     }
 
     // detalhamento dos custos

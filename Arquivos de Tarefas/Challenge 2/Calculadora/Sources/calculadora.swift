@@ -166,6 +166,8 @@ struct Calculadora:AsyncParsableCommand {
                     output += costBreakdown!
                 }
             }
+
+            print(output)
         }
 
         // GUIA DINHEIRO->ROBUX
@@ -202,6 +204,7 @@ struct Calculadora:AsyncParsableCommand {
                 }
             }
 
+            print(output)
         }
     }
 }
