@@ -81,30 +81,32 @@ func MoneyToRobux(money: Double, hideDescription: Bool, multiplier: Double, curr
 
     while moneyBalance >= 0.49 {
         for cost in costList {
-            print("teste1")
+            var found:Bool = false
 
-            innerLoop: if cost.cost <= moneyBalance {
+            if cost.cost <= moneyBalance {
                 moneyBalance -= cost.cost
 
                 if cost.desktopAmount != nil { // se tem o valor do desktop, usar o mesmo pois é mais custo benefício
                     desktopTotal += cost.desktopAmount!
                     mixedTotal += cost.desktopAmount!
+
+                    found = true
                 }
                 else {
                     mixedTotal += cost.mobileAmount // se não tem, não usa
+
+                    found = true
                 }
 
-                var modifiedCost = cost
-                modifiedCost.multiplier = multiplier
-                modifiedCost.currency = currency
+                if found {
+                    var modifiedCost = cost
+                    modifiedCost.multiplier = multiplier
+                    modifiedCost.currency = currency
 
-                localCostList.append(modifiedCost)
-
-                break innerLoop
+                    localCostList.append(modifiedCost)
+                }
             }
         }
-
-        print("teste 2")
     }
     
     // detalhamento dos custos
@@ -135,24 +137,32 @@ func RobuxToMoney(robux: Int, hideDescription: Bool, multiplier: Double, currenc
 
     while robuxBalance >= 40 {
         for cost in costList {
+            var found:Bool = false
+
             if cost.desktopAmount != nil && cost.desktopAmount! <= robuxBalance {
                 mixedTotal += cost.cost
                 desktopTotal += cost.cost
 
                 print("amount: \(cost.desktopAmount!)")
                 robuxBalance -= cost.desktopAmount!
+
+                found = true
             }
             else if cost.mobileAmount <= robuxBalance {
                 mixedTotal += cost.cost
 
                 robuxBalance -= cost.mobileAmount
+
+                found = true
             }
 
-            var modifiedCost = cost
-            modifiedCost.multiplier = multiplier
-            modifiedCost.currency = currency
+            if found {
+                var modifiedCost = cost
+                modifiedCost.multiplier = multiplier
+                modifiedCost.currency = currency
 
-            localCostList.append(modifiedCost)
+                localCostList.append(modifiedCost)
+            }
         }
     }
 
