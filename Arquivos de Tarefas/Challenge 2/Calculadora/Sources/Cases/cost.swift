@@ -81,11 +81,9 @@ func MoneyToRobux(money: Double, hideDescription: Bool, multiplier: Double, curr
 
     while moneyBalance >= 0.49 {
         for cost in costList {
-            var found:Bool = false
-
             print("teste1")
 
-            if cost.cost <= moneyBalance {
+            innerLoop: if cost.cost <= moneyBalance {
                 moneyBalance -= cost.cost
 
                 if cost.desktopAmount != nil { // se tem o valor do desktop, usar o mesmo pois é mais custo benefício
@@ -102,11 +100,7 @@ func MoneyToRobux(money: Double, hideDescription: Bool, multiplier: Double, curr
 
                 localCostList.append(modifiedCost)
 
-                found = true
-            }
-
-            if found {
-                break
+                break innerLoop
             }
         }
 
@@ -140,11 +134,9 @@ func RobuxToMoney(robux: Int, hideDescription: Bool, multiplier: Double, currenc
     var localCostList:[robuxCost] = []
 
     while robuxBalance >= 40 {
-        var found:Bool = false
-
         print("teste1")
 
-        for cost in costList {
+        innerLoop: for cost in costList {
             if cost.desktopAmount != nil && cost.desktopAmount! <= robuxBalance {
                 mixedTotal += cost.cost
                 desktopTotal += cost.cost
@@ -163,11 +155,7 @@ func RobuxToMoney(robux: Int, hideDescription: Bool, multiplier: Double, currenc
 
                 localCostList.append(modifiedCost)
 
-            found = true
-        }
-
-        if found {
-            break
+            break innerLoop
         }
 
         print("teste2")
