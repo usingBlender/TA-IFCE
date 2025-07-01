@@ -1,27 +1,27 @@
 import ArgumentParser
 
 @main
-struct Calculadora:ParsableCommand {
-    @Option(help: "Input the gamepass price, get the value the seller is given, tax accounted for (30%)")
+struct Calculadora:AsyncParsableCommand {
+    @Option(name: .long, help: "Input the gamepass price, get the value the seller is given, tax accounted for (30%)")
     var gamepassReward:Int? = nil // IMPLEMENTADO
 
-    @Option(help: "Input the desired value, get the price of the gamepass needed to reward it")
+    @Option(name: .long, help: "Input the desired value, get the price of the gamepass needed to reward it")
     var gamepassCost:Int? = nil // IMPLEMENTADO
 
     // Coisas de dinheiro abaixo
-    @Option(help: "Input a currency to translate outputs to, works alongside other options")
+    @Option(name: .long, help: "Input a currency to translate outputs to, works alongside other options")
     var currency:String = "usd" // IMPLEMENTADO
 
-    @Option(help: "Input a value to see how much it'll amount to through DevEx")
+    @Option(name: .long, help: "Input a value to see how much it'll amount to through DevEx")
     var devex:Int? = nil // IMPLEMENTADO
 
-    @Flag(help: "Enable or disable the purchase guides on the RBX-Money or Money-RBX options")
+    @Flag(name: .long, help: "Enable or disable the purchase guides on the RBX-Money or Money-RBX options")
     var hidePurchaseGuide:Bool = false // IMPLEMENTADO
 
-    @Option(help: "Input an amount of robux, get how much it'll cost and what to purchase")
+    @Option(name: .long, help: "Input an amount of robux, get how much it'll cost and what to purchase")
     var robux:Int? = nil // IMPLEMENTADO
 
-    @Option(help: "Input an amount of money, get how much roblox it'll total to and what to purchase")
+    @Option(name: .long, help: "Input an amount of money, get how much roblox it'll total to and what to purchase")
     var money:Double? = nil // IMPLEMENTADO
 
     mutating func run() async throws {
@@ -35,6 +35,7 @@ struct Calculadora:ParsableCommand {
 
             CUSTO (INICIAL): \(gamepassReward!) RBX
             RECOMPENSA (FINAL): \(reward) RBX
+
             """
 
             print(output)
@@ -50,6 +51,7 @@ struct Calculadora:ParsableCommand {
 
             CUSTO (FINAL): \(cost) RBX
             RECOMPENSA (INICIAL): \(gamepassCost!) RBX
+
             """
 
             print(output)
@@ -72,6 +74,7 @@ struct Calculadora:ParsableCommand {
                     ERRO ENCONTRADO:
 
                     \(error.localizedDescription)
+
                     """
 
                     print(errorOutput)
@@ -84,6 +87,7 @@ struct Calculadora:ParsableCommand {
             ERRO ENCONTRADO:
 
             Código de moeda inválido, siga o padrão (USD, BRL, aud, gbp)
+
             """
 
             let validity = manager.VerifyCodeValidity(currencyCode: currency)
@@ -117,6 +121,7 @@ struct Calculadora:ParsableCommand {
 
             ROBUX: \(devex!) RBX
             RECOMPENSA: $\(payout) \(currency.uppercased())
+
             """
 
             print(output)
@@ -140,6 +145,7 @@ struct Calculadora:ParsableCommand {
                 \n--------------------
 
                 A quantia de robux em questão não permite nenhuma compra, tente um valor maior
+
                 """
             } else {
                 if currency != "usd" {
