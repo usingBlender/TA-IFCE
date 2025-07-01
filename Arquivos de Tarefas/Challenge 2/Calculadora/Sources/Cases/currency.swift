@@ -1,5 +1,5 @@
 import Foundation
-// import FoundationNetworking // :3
+import FoundationNetworking // :3
 
 class CurrencyExchangeManager {
     // STRUCTS AQUI
