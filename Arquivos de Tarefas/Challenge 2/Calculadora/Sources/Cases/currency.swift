@@ -72,7 +72,6 @@ class CurrencyExchangeManager {
             if let decodedResponse = try? JSONDecoder().decode(ExchangeRateTable.self, from: data) {
                 exchangeRateTable = decodedResponse
 
-                var teste = JSONSerialization.jsonObject(with: data, options: [])
                 return Result.success(true)
             }
         } catch {
