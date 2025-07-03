@@ -8,11 +8,13 @@ struct robuxCost {
     var currency:String = "usd"
 
     var description:String {
+        let currencyValue = (cost*multiplier).formatted(.currency(code: currency.uppercased()))
+
         if desktopAmount == nil {
-            return "\(mobileAmount) Robux (mobile somente) || \(cost*multiplier) \(currency.uppercased())";
+            return "\(mobileAmount) Robux (mobile somente) || \(currencyValue)";
         }
         else {
-            return "\(mobileAmount) Robux (mobile) / \(desktopAmount!) Robux (desktop) || \(cost*multiplier) \(currency.uppercased())";
+            return "\(mobileAmount) Robux (mobile) / \(desktopAmount!) Robux (desktop) || \(currencyValue)";
         }
     }
 }
@@ -79,12 +81,15 @@ func MoneyToRobux(money: Double, hideDescription: Bool, multiplier: Double, curr
     var moneyBalance = money
     var localCostList:[robuxCost] = []
 
-    while moneyBalance >= 0.49 {
+    while moneyBalance >= (0.49 * multiplier) { // valor minimo multiplicado pela taxa
         for cost in costList {
             var found:Bool = false
 
-            if cost.cost <= moneyBalance {
-                moneyBalance -= cost.cost
+            // No caso de ser uma moeda diferente
+            let multipliedCost = cost.cost * multiplier
+
+            if multipliedCost <= moneyBalance {
+                moneyBalance -= multipliedCost
 
                 if cost.desktopAmount != nil { // se tem o valor do desktop, usar o mesmo pois é mais custo benefício
                     desktopTotal += cost.desktopAmount!
@@ -112,7 +117,7 @@ func MoneyToRobux(money: Double, hideDescription: Bool, multiplier: Double, curr
     // detalhamento dos custos
     var description:String? = nil
     if !hideDescription {
-        description = "\nDetalhamento:\n"
+        description = "\n\nDetalhamento:\n"
         for cost in localCostList {
             description! += "\(cost.description)\n"
         }
@@ -168,7 +173,7 @@ func RobuxToMoney(robux: Int, hideDescription: Bool, multiplier: Double, currenc
     // detalhamento dos custos
     var description:String? = nil
     if !hideDescription {
-        description = "\nDetalhamento:\n"
+        description = "\n\nDetalhamento:\n"
         for cost in localCostList {
             description! += "\(cost.description)\n"
         }

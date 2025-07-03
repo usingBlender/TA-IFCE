@@ -2,29 +2,32 @@ import ArgumentParser
 
 @main
 struct Calculadora:AsyncParsableCommand {
-    @Option(name: .long, help: "Input the gamepass price, get the value the seller is given, tax accounted for (30%)")
+    @Option(name: .long, help: "Coloque o preço do gamepass, receba o valor recebido pelo vendedor, contando com a aplicação das taxas de 30%")
     var gamepassReward:Int? = nil // IMPLEMENTADO
 
-    @Option(name: .long, help: "Input the desired value, get the price of the gamepass needed to reward it")
+    @Option(name: .long, help: "Coloque o valor desejado a ser recebido, receba o valor do gamepass necessário para tal, contando com a aplicação das taxas de 30%")
     var gamepassCost:Int? = nil // IMPLEMENTADO
 
     // Coisas de dinheiro abaixo
-    @Option(name: .long, help: "Input a currency to translate outputs to, works alongside other options")
+    @Option(name: .long, help: "Coloque uma moeda de sua escolha (e.g: BRL, usd, aud, CNY)")
     var currency:String = "usd" // IMPLEMENTADO
 
-    @Option(name: .long, help: "Input a value to see how much it'll amount to through DevEx")
+    @Option(name: .long, help: "Coloque um valor para ver o quanto renderá através do devex (não contando com as taxas de transferência)")
     var devex:Int? = nil // IMPLEMENTADO
 
-    @Flag(name: .long, help: "Enable or disable the purchase guides on the RBX-Money or Money-RBX options")
+    @Flag(name: .long, help: "Utilize para desabilitar os guias de compra nas opções (robux) e (money)")
     var hidePurchaseGuide:Bool = false // IMPLEMENTADO
 
-    @Option(name: .long, help: "Input an amount of robux, get how much it'll cost and what to purchase")
+    @Option(name: .long, help: "Coloque uma quantia de robux para ver quanto estes custarão, contando com um guia de compra")
     var robux:Int? = nil // IMPLEMENTADO
 
-    @Option(name: .long, help: "Input an amount of money, get how much roblox it'll total to and what to purchase")
+    @Option(name: .long, help: "Cocloque uma quantia de dinheiro para ver quanto esta renderá em robux, contando com um guia de compra")
     var money:Double? = nil // IMPLEMENTADO
 
     mutating func run() async throws {
+        // Bool pra ver se manda a mensagem de ajuda
+        var foundFunction:Bool = false 
+
         // CALCULO DE LIQUIDEZ DE GAMEPASS
         if gamepassReward != nil {
             let reward = CalculateGamepassReward(gamepassPrice:gamepassReward!)
@@ -33,11 +36,12 @@ struct Calculadora:AsyncParsableCommand {
             \n=========================================
             CALCULO DE RECOMPENSA DE GAMEPASS: 
 
-            CUSTO (INICIAL): \(gamepassReward!) RBX
-            RECOMPENSA (FINAL): \(reward) RBX
+            CUSTO IDEALIZADO: \(gamepassReward!) RBX
+            VALOR RECEBIDO: \(reward) RBX
 
             """
 
+            foundFunction = true
             print(output)
         }
 
@@ -49,11 +53,12 @@ struct Calculadora:AsyncParsableCommand {
             \n=========================================
             CALCULO DE CUSTO DE GAMEPASS:
 
-            CUSTO (FINAL): \(cost) RBX
-            RECOMPENSA (INICIAL): \(gamepassCost!) RBX
+            CUSTO NECESSÁRIO: \(cost) RBX
+            VALOR DESEJADO A SER RECEBIDO: \(gamepassCost!) RBX
 
             """
 
+            foundFunction = true
             print(output)
         }
 
@@ -120,10 +125,11 @@ struct Calculadora:AsyncParsableCommand {
             CALCULO DE DEVEX:
 
             ROBUX: \(devex!) RBX
-            RECOMPENSA: \(payout) \(currency.uppercased())
+            RECOMPENSA: \(payout.formatted(.currency(code: currency.uppercased())))
 
             """
 
+            foundFunction = true
             print(output)
         }
 
@@ -156,8 +162,8 @@ struct Calculadora:AsyncParsableCommand {
                 output += """
                 \n--------------------
 
-                TOTAL (COMPRAS PC + MOBILE): \(mixedTotal) \(currency.uppercased())
-                TOTAL (COMPRAS SOMENTE PC): \(desktopTotal) \(currency.uppercased())
+                TOTAL (COMPRAS PC + MOBILE): \(mixedTotal.formatted(.currency(code: currency.uppercased())))
+                TOTAL (COMPRAS SOMENTE PC): \(desktopTotal.formatted(.currency(code: currency.uppercased())))
 
                 \n--------------------
                 """
@@ -167,6 +173,7 @@ struct Calculadora:AsyncParsableCommand {
                 }
             }
 
+            foundFunction = true
             print(output)
         }
 
@@ -178,8 +185,8 @@ struct Calculadora:AsyncParsableCommand {
             \n=========================================
             GUIA DINHEIRO -> ROBUX:
 
-            DINHEIRO (PARA GASTAR): \(money!) \(currency.uppercased())
-            RESTO (NÃO GASTÁVEL): \(remainder) \(currency.uppercased())
+            DINHEIRO (PARA GASTAR): \(money!.formatted(.currency(code: currency.uppercased())))
+            RESTO (NÃO GASTÁVEL): \(remainder.formatted(.currency(code: currency.uppercased())))
 
             """
 
@@ -204,7 +211,12 @@ struct Calculadora:AsyncParsableCommand {
                 }
             }
 
+            foundFunction = true
             print(output)
+        }
+
+        if !foundFunction {
+            print("Nenhum parametro detectado, use --help no final para ver os possíveis casos de uso da ferramenta!")
         }
     }
 }
